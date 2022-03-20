@@ -1,0 +1,42 @@
+<div class="form-container" id="{{ module.form_field.form_id }}">
+    {% form
+        form_to_use="{{ module.form_field.form_id }}"
+        response_response_type="{{ module.form_field.response_type }}"
+        response_message="{{ module.form_field.message }}"
+        response_redirect_id="{{ module.form_field.redirect_id }}"
+        response_redirect_url="{{module.form_field.redirect_url}}"
+        gotowebinar_webinar_key="{{ module.form_field.gotowebinar_webinar_key }}"
+    %}
+</div>
+<style>
+    .form-container[id="{{ module.form_field.form_id }}"] {
+        {% if module.style.background_color %}
+            background: rgba({{ module.style.background_color.color|convert_rgb }}, {{ module.style.background_color.opacity }});
+        {% else %}
+            background: transparent;
+        {% endif%}
+        {% if module.style.spacing_field %}
+            {{ module.style.spacing_field.css }}
+        {% endif%}
+        {% if module.style.border_field %}
+            {{ module.style.border_field.css }}
+        {% endif%}
+        {% if module.style.border_radius %}
+            border-radius: {{ module.style.border_radius }}px;
+        {% endif%}
+    }
+    .form-container[id="{{ module.form_field.form_id }}"] .hs-button[type="submit"] {
+        background-color: #00dcc7;
+        border: 1px solid #00dcc7;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        color: #4c4d4f;
+        font-weight: 500;
+        font-size: 20px;
+        padding: 20px;
+    }
+    .form-container[id="{{ module.form_field.form_id }}"] .hs-button[type="submit"]:hover {
+        background-color: #0f3c64;
+        border: 1px solid #0f3c64;
+    }
+</style>
