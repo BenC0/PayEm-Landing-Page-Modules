@@ -1,0 +1,12 @@
+{% set tag_name = "p" %}
+{% if module.text_type %}
+    {% set tag_name = module.text_type %}
+{% endif %}
+
+{% set open_tag = "<{{tag_name}}>" %}
+{% set close_tag = "</{{tag_name}}>" %}
+{{ open_tag }}
+{% if module.text_field %}
+    {{ module.text_field }}
+{% endif %}
+{{ close_tag }}
