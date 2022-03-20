@@ -1,14 +1,18 @@
 <!--
 templateType: page
 isAvailableForNewContent: true
-label: PY000 Landing Page
+label: PY000 Landing Page Template
 screenshotPath: ../images/template-previews/home.png
 -->
 {% extends "./layouts/base.html" %}
+{% block header %}
+  {% module "module_164778575623856" path="/payem-theme-2021/modules/header-module-new_alt", label="header-module-new_alt" %}
+{% endblock header %}
 {% block body %}
 {% dnd_area 'dnd_area'
   label='Main section',
-  class='body-container body-container--landing-page'
+  class='body-container body-container--landing-page',
+  style="padding-top: 95px;"
 %}
 
 {% end_dnd_area %}
