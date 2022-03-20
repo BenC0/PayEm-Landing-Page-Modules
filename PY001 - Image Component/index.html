@@ -1,0 +1,60 @@
+{% if module.responsive_images %}
+    {% if module.style.background_style %}
+        {% set background = "background: transparent;" %}
+        {% if module.style.background_style == "color" %}
+            {% set background = "background: rgba({{ module.style.background_color.color|convert_rgb }}, {{ module.style.background_color.opacity }});" %}
+        {% elif module.style.background_style == "gradient" %}
+            {% set background = "background: {{ module.style.gradient_field.css }};" %}
+        {% endif %}
+    {% endif %}
+<div class="image_container"  style="{{ background }};">
+
+    <picture>
+        {% if "desktop_image" in module.responsive_images %}
+            {% if module.desktop_image.src %}
+                {% set sizeAttrs = 'width="{{ module.all_devices_image.width }}" height="{{ module.all_devices_image.height }}"' %}
+                {% if module.all_devices_image.size_type == 'auto' %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                {% elif module.all_devices_image.size_type == 'auto_custom_max' %}
+                    {% set sizeAttrs = 'style="max-width: {{ module.all_devices_image.max_width }}px; max-height: {{ module.all_devices_image.max_height }}px;"' %}
+                {% endif %}
+                {% set loadingAttr = module.all_devices_image.loading != 'disabled' ? 'loading="{{ module.all_devices_image.loading }}"' : '' %}
+                {% set default_image_src = module.desktop_image.src %}
+                {% set default_image_alt = module.desktop_image.alt %}
+                <source srcset="{{ module.desktop_image.src }}" media="(min-width: 768px)">
+            {% endif %}
+        {% endif %}
+
+        {% if "mobile_image" in module.responsive_images %}
+            {% if module.mobile_image.src %}
+                {% set sizeAttrs = 'width="{{ module.all_devices_image.width }}" height="{{ module.all_devices_image.height }}"' %}
+                {% if module.all_devices_image.size_type == 'auto' %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                {% elif module.all_devices_image.size_type == 'auto_custom_max' %}
+                    {% set sizeAttrs = 'style="max-width: {{ module.all_devices_image.max_width }}px; max-height: {{ module.all_devices_image.max_height }}px;"' %}
+                {% endif %}
+                {% set loadingAttr = module.all_devices_image.loading != 'disabled' ? 'loading="{{ module.all_devices_image.loading }}"' : '' %}
+                {% set default_image_src = module.mobile_image.src %}
+                {% set default_image_alt = module.mobile_image.alt %}
+                <source srcset="{{ module.mobile_image.src }}" media="(min-width: 1px)">
+            {% endif %}
+        {% endif %}
+
+        {% if "all_devices_image" in module.responsive_images %}
+            {% if module.all_devices_image.src %}
+                {% set sizeAttrs = 'width="{{ module.all_devices_image.width }}" height="{{ module.all_devices_image.height }}"' %}
+                {% if module.all_devices_image.size_type == 'auto' %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                {% elif module.all_devices_image.size_type == 'auto_custom_max' %}
+                    {% set sizeAttrs = 'style="max-width: {{ module.all_devices_image.max_width }}px; max-height: {{ module.all_devices_image.max_height }}px;"' %}
+                {% endif %}
+                {% set loadingAttr = module.all_devices_image.loading != 'disabled' ? 'loading="{{ module.all_devices_image.loading }}"' : '' %}
+                {% set default_image_src = module.all_devices_image.src %}
+                {% set default_image_alt = module.all_devices_image.alt %}
+            {% endif %}
+        {% endif %}
+
+        <img src="{{ default_image_src }}" alt="{{ default_image_alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+    </picture>
+</div>
+{% endif %}
