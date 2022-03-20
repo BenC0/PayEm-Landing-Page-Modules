@@ -3,12 +3,12 @@
     {% set tag_name = module.text_type %}
 {% endif %}
 
-{% set text_alignment = "text-align: {{ module.style.textalignment_field }};" %}
+{% set text_alignment = module.style.textalignment_field.css %}
 
-{% if module.style.background_color.color %}
-    {% set color = "color: rgba({{ module.style.background_color.color|convert_rgb }}, {{ module.style.background_color.opacity }});" %}
+{% if module.style.color_field %}
+    {% set color = "color: rgba({{ module.style.color_field.color|convert_rgb }}, {{ module.style.color_field.opacity }});" %}
 {% else %}
-    {% set color = "color: inherit" %}
+    {% set color = "color: inherit;" %}
 {% endif%}
 
 {% if module.style.border_field %}
