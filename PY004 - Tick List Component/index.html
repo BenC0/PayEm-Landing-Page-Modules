@@ -1,0 +1,23 @@
+{% if module.icon %}
+    {% set list_style = "list-style-image: url('{{ module.icon.src }}');" %}
+{% else %}
+    {% set list_style = "" %}
+{% endif %}
+
+{% if module.style.text_color %}
+    {% set color = "color: rgba({{ module.style.text_color.color|convert_rgb }}, {{ module.style.text_color.opacity }});" %}
+{% else %}
+    {% set color = "color: inherit;" %}
+{% endif%}
+
+{% if module.style.spacing %}
+    {% set spacing = module.style.spacing.css %}
+{% else %}
+    {% set spacing = "" %}
+{% endif%}
+
+{% if module.list %}
+    <div class="list" id="{{ module.list.id }}" style="{{ color }}{{ list_style }}{{ spacing }}">
+        {{ module.list }}
+    </div>
+{% endif %}
